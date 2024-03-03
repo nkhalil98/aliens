@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "aliens"
+version = "0.1.0"
+description = "Alien Invasion Game in Python"
+authors = ["Nabil Khalil <nabilamirkhalil.com>"]
+readme = "README.md"
+packages = [{ include = "aliens", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pygame = "^2.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
