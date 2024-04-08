@@ -3,7 +3,7 @@ from pathlib import Path
 import pygame
 from pygame.sprite import Sprite
 
-IMAGE_PATH = Path(__file__).parent.parent / "assets" / "images" / "alien.bmp"
+IMAGE_PATH = Path(__file__).parent / "assets" / "images" / "alien.bmp"
 
 
 class Alien(Sprite):
