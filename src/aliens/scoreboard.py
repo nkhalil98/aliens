@@ -15,11 +15,11 @@ class Scoreboard:
         self.settings = ai_game.settings
         self.stats = ai_game.stats
 
-        # Font settings for scoring information.
+        # Font settings for scoring information
         self.text_color = (30, 30, 30)
         self.font = pygame.font.SysFont(None, 32)
 
-        # Prepare the initial game stats.
+        # Prepare the initial game stats
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
@@ -32,7 +32,7 @@ class Scoreboard:
             f"Score: {score_str}", True, self.text_color, self.settings.bg_color
         )
 
-        # Display the score at the top right of the screen.
+        # Display the score at the top right of the screen
         self.score_rect = self.score_image.get_rect()
         self.score_rect.right = self.screen_rect.right - 20
         self.score_rect.top = 20
