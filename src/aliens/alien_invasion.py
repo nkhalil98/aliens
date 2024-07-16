@@ -36,10 +36,10 @@ class AlienInvasion:
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
 
+        # Ship, bullets, and aliens
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
-
         self._create_fleet()
 
         # Start Alien Invasion in an inactive state
@@ -52,7 +52,7 @@ class AlienInvasion:
         """Start the main loop for the game."""
         # Event loop to listen for events and respond to them
         while True:
-            self._check_events()
+            self._check_events()  # 1
 
             if self.stats.game_active:
                 self.ship.update()
@@ -62,8 +62,8 @@ class AlienInvasion:
                 self.aliens.empty()
                 self.bullets.empty()
 
-            self._update_screen()
-            self.clock.tick(60)
+            self._update_screen()  # 2
+            self.clock.tick(60)  # 3
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
@@ -201,14 +201,7 @@ class AlienInvasion:
             # Decrement ships_left, and update scoreboard
             self.stats.ships_left -= 1
             self.sb.prep_ships()
-
-            # Get rid of any remaining aliens and bullets
-            self.aliens.empty()
-            self.bullets.empty()
-
-            # Create a new fleet and center the ship
-            self._create_fleet()
-            self.ship.center_ship()
+            self._reset_objects()
 
             # Pause
             sleep(0.5)
@@ -231,25 +224,19 @@ class AlienInvasion:
         """Start a new game when the player presses 'p' or clicks the Play
         button."""
         if not self.stats.game_active:
-            # Reset the game settings.
+            # Reset the game settings
             self.settings.initialize_dynamic_settings()
 
-            # Reset the game statistics.
+            # Reset the game statistics
             self.stats.reset_stats()
             self.sb.prep_score()
             self.sb.prep_level()
             self.sb.prep_ships()
             self.stats.game_active = True
 
-            # Get rid of any remaining aliens and bullets.
-            self.aliens.empty()
-            self.bullets.empty()
+            self._reset_objects()
 
-            # Create a new fleet and center the ship.
-            self._create_fleet()
-            self.ship.center_ship()
-
-            # Hide the mouse cursor.
+            # Hide the mouse cursor
             pygame.mouse.set_visible(False)
 
     def _store_high_score(self):
@@ -257,6 +244,16 @@ class AlienInvasion:
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.stats.save_high_score()
+
+    def _reset_objects(self):
+        """Reset the ship, the aliens, and remove the bullets."""
+        # Get rid of any remaining aliens and bullets
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # Create a new fleet and center the ship
+        self._create_fleet()
+        self.ship.center_ship()
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
