@@ -63,6 +63,7 @@ class AlienInvasion:
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self._store_high_score()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
@@ -89,6 +90,7 @@ class AlienInvasion:
         elif event.key == pygame.K_p:
             self._start_game()
         elif event.key == pygame.K_q:
+            self._store_high_score()
             sys.exit()
 
     def _check_keyup_events(self, event):
@@ -205,6 +207,8 @@ class AlienInvasion:
             # Pause.
             sleep(0.5)
         else:
+            self._store_high_score()
+            self.sb.prep_high_score()
             self.stats.game_active = False
             pygame.mouse.set_visible(True)
 
@@ -241,6 +245,12 @@ class AlienInvasion:
 
             # Hide the mouse cursor.
             pygame.mouse.set_visible(False)
+
+    def _store_high_score(self):
+        """Store the high score in a file."""
+        if self.stats.score > self.stats.high_score:
+            self.stats.high_score = self.stats.score
+            self.stats.save_high_score()
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
