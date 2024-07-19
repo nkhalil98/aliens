@@ -69,7 +69,7 @@ class AlienInvasion:
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self._store_high_score()
+                self.stats.save_high_score()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
@@ -96,7 +96,7 @@ class AlienInvasion:
         elif event.key == pygame.K_p:
             self._start_game()
         elif event.key == pygame.K_q:
-            self._store_high_score()
+            self.stats.save_high_score()
             sys.exit()
 
     def _check_keyup_events(self, event):
@@ -133,6 +133,7 @@ class AlienInvasion:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.sb.check_high_score()
 
         # If all aliens are destroyed, create a new fleet
         if not self.aliens:
@@ -206,8 +207,7 @@ class AlienInvasion:
             # Pause
             sleep(0.5)
         else:
-            self._store_high_score()
-            self.sb.prep_high_score()
+            self.stats.save_high_score()
             self.stats.game_active = False
             pygame.mouse.set_visible(True)
 
@@ -228,7 +228,7 @@ class AlienInvasion:
             self.settings.initialize_dynamic_settings()
 
             # Reset the game statistics
-            self.stats.reset_stats()
+            self.stats.init_stats()
             self.sb.prep_score()
             self.sb.prep_level()
             self.sb.prep_ships()
@@ -238,12 +238,6 @@ class AlienInvasion:
 
             # Hide the mouse cursor
             pygame.mouse.set_visible(False)
-
-    def _store_high_score(self):
-        """Store the high score in a file."""
-        if self.stats.score > self.stats.high_score:
-            self.stats.high_score = self.stats.score
-            self.stats.save_high_score()
 
     def _reset_objects(self):
         """Reset the ship, the aliens, and remove the bullets."""

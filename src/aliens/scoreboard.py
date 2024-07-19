@@ -61,6 +61,12 @@ class Scoreboard:
         """Draw high score to the screen."""
         self.screen.blit(self.high_score_image, self.high_score_rect)
 
+    def check_high_score(self):
+        """Check to see if there's a new high score."""
+        if self.stats.score > self.stats.high_score:
+            self.stats.high_score = self.stats.score
+            self.prep_high_score()
+
     def prep_level(self):
         """Turn the level into a rendered image."""
         level_str = str(self.stats.level)
