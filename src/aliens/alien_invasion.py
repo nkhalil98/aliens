@@ -135,17 +135,9 @@ class AlienInvasion:
             self.sb.prep_score()
             self.sb.check_high_score()
 
-        # If all aliens are destroyed, create a new fleet
+        # If all aliens are destroyed, start a new level
         if not self.aliens:
-            # Destroy existing bullets and create new fleet
-            self.bullets.empty()
-            self._create_fleet()
-            self.settings.increase_speed()
-            self.settings.increase_point_values()
-
-            # Increase level
-            self.stats.level += 1
-            self.sb.prep_level()
+            self._start_new_level()
 
     def _create_fleet(self):
         """Create the fleet of aliens."""
@@ -234,6 +226,7 @@ class AlienInvasion:
             self.sb.prep_ships()
             self.stats.game_active = True
 
+            # Reset the game elements
             self._reset_objects()
 
             # Hide the mouse cursor
@@ -248,6 +241,18 @@ class AlienInvasion:
         # Create a new fleet and center the ship
         self._create_fleet()
         self.ship.center_ship()
+
+    def _start_new_level(self):
+        """Start a new level."""
+        # Destroy existing bullets and create new fleet
+        self.bullets.empty()
+        self._create_fleet()
+        self.settings.increase_speed()
+        self.settings.increase_point_values()
+
+        # Increase level
+        self.stats.level += 1
+        self.sb.prep_level()
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
