@@ -1,18 +1,17 @@
-[tool.poetry]
+[project]
 name = "aliens"
+requires-python = ">=3.9"
 version = "0.1.0"
 description = "Alien Invasion Game in Python"
-authors = ["Nabil Khalil <nabilamirkhalil.com>"]
+authors = [{ name = "Nabil Khalil", email = "nabilamirkhalil@gmail.com" }]
 readme = "README.md"
 packages = [{ include = "aliens", from = "src" }]
+dependencies = [
+    "pygame (>=2.6)"
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-pygame = "^2.5.2"
-
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.4.10"
+[tool.poetry.group.test.dependencies]
+ruff = ">=0.9"
 
 [build-system]
 requires = ["poetry-core"]
