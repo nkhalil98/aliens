@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 HIGH_SCORE_PATH = Path(__file__).parent / "assets" / "score" / "high_score.txt"
@@ -35,5 +36,10 @@ class GameStats:
 
     def save_high_score(self):
         """Save the high score to a file."""
-        with open(HIGH_SCORE_PATH, "w") as file:
-            file.write(str(self.high_score))
+        if HIGH_SCORE_PATH.exists():
+            with open(HIGH_SCORE_PATH, "w") as file:
+                file.write(str(self.high_score))
+        else:
+            os.makedirs(HIGH_SCORE_PATH.parent)
+            with open(HIGH_SCORE_PATH, "x") as file:
+                file.write(str(self.high_score))
