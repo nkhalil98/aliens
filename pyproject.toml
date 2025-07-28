@@ -1,6 +1,6 @@
 [project]
 name = "aliens"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 version = "0.1.0"
 description = "Alien Invasion Game in Python"
 authors = [{ name = "Nabil Khalil", email = "nabilamirkhalil@gmail.com" }]
