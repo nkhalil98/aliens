@@ -1,6 +1,7 @@
 import pygame.font
 from pygame.sprite import Group
 
+from aliens.colors import BLUE
 from aliens.ship import Ship
 
 
@@ -16,7 +17,7 @@ class Scoreboard:
         self.stats = ai_game.stats
 
         # Font settings for scoring information
-        self.text_color = (30, 30, 30)
+        self.text_color = BLUE
         self.font = pygame.font.SysFont(None, 32)
 
         # Prepare the initial game stats

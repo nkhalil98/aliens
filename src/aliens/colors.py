@@ -1,0 +1,8 @@
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+LIGHT_GRAY = (230, 230, 230)
+DARK_GRAY = (60, 60, 60)
+VERY_DARK_GRAY = (30, 30, 30)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
