@@ -11,6 +11,9 @@ class Settings:
         self.screen_height = 800
         self.bg_color = LIGHT_GRAY
 
+        # Frame rate settings
+        self.fps = 60
+
         # Ship settings
         self.ship_limit = 3
 
@@ -22,9 +25,11 @@ class Settings:
 
         # Alien settings
         self.fleet_drop_speed = 10
+        self.bottom_margin_multiplier = 6
+        self.right_margin_multiplier = 2
 
         # How quickly the game speeds up
-        self.speedup_scale = 1.1
+        self.speedup_scale = 1.2
 
         # How quickly the alien point values increase
         self.score_scale = 2.0

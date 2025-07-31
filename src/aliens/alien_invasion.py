@@ -54,7 +54,7 @@ class AlienInvasion:
             self._handle_events()  # handle events
             self._update_objects()  # update the game objects
             self._update_screen()  # update the screen
-            self.clock.tick(60)  # set the frame rate to 60 FPS
+            self.clock.tick(self.settings.fps)  # set the frame rate
 
     def _handle_events(self):
         """Event Handler to respond to keypresses and mouse events."""
@@ -145,8 +145,14 @@ class AlienInvasion:
         alien_width, alien_height = alien.rect.size
         current_x, current_y = alien_width, alien_height
 
-        while current_y < (self.settings.screen_height - 6 * alien_height):
-            while current_x < (self.settings.screen_width - 2 * alien_width):
+        while current_y < (
+            self.settings.screen_height
+            - self.settings.bottom_margin_multiplier * alien_height
+        ):
+            while current_x < (
+                self.settings.screen_width
+                - self.settings.right_margin_multiplier * alien_width
+            ):
                 self._create_alien(current_x, current_y)
                 current_x += 2 * alien_width
             # Finished a row; reset x value, and increment y value
@@ -197,8 +203,7 @@ class AlienInvasion:
             self.stats.ships_left -= 1
             self.sb.prep_ships()
             self._reset_objects()
-            # Pause
-            sleep(0.5)
+            sleep(0.5)  # pause
         else:
             self.stats.save_high_score()
             self.stats.game_active = False
